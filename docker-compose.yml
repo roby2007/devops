@@ -1,0 +1,17 @@
+version: '3'
+services:
+  flask_app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      GREETING: "Welcome to my app!"
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "80:80"
+    depends_on:
+      - flask_app
